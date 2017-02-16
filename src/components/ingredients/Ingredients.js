@@ -1,15 +1,11 @@
 import React, { Component } from 'react';
-import { connect } from 'react-redux'
 
 export class Ingredients extends Component {
   render(){
-    let ingredients = this.props.ingredients.map(function(ingredient){
-      return <li>{ingredient.name}</li>
-    })
     return(
         <div>
           <ul>
-            {ingredients}
+            List of Ingredients.
           </ul>
         </div>
     )
@@ -17,9 +13,4 @@ export class Ingredients extends Component {
 }
 
 
-export const ConnectedIngredients = connect(mapStateToProps)(Ingredients)
-
-
-function mapStateToProps(state){
-  return {ingredients: state.ingredients}
-}
+export const ConnectedIngredients = (Ingredients)
