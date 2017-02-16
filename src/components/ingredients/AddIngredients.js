@@ -12,8 +12,6 @@ export class AddIngredients extends Component {
     event.preventDefault()
   }
   render(){
-    console.log('in addIngredients')
-    console.log(this.props.unselectedIngredients)
     let addIngredients = this.props.unselectedIngredients &&  this.props.unselectedIngredients.map((ingredient) => {
       return <ConnectedAddIngredient {...ingredient} />
     })
