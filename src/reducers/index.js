@@ -1,3 +1,2 @@
-export default function notTheRightReducer(state = 'default', action){
-  return state;
-}
+import {combineReducers} from 'redux';
+import petsReducer from './petsReducer';
