@@ -25,5 +25,5 @@ ReactDOM.render(
       <Route path='/movies' component={MoviesPage}/>
     </Router>
   </Provider>,
-  document.getElementById('container')
+  document.getElementById('root')
 );
