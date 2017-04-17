@@ -1,14 +1,9 @@
 import React from 'react';
-import ReactDOM from 'react-dom';
-import { createStore } from 'redux';
+import { render } from 'react-dom';
 import { Provider } from 'react-redux';
-import { Router, Route, IndexRoute, browserHistory } from 'react-router';
+import { createStore } from 'redux';
 import rootReducer from './reducers';
-import App from './components/App';
-import MoviesPage from './containers/MoviesPage';
-import MoviesNew from './containers/MoviesNew';
-import MoviesAbout from './components/MoviesAbout';
-import MoviesShow from './containers/MoviesShow';
+import App from './containers/App';
 
 const initialState = {
   movies: [
@@ -18,12 +13,9 @@ const initialState = {
 
 const store = createStore(rootReducer, initialState);
 
-ReactDOM.render(
+render (
   <Provider store={store} >
-    <Router history={browserHistory} >
-      <Route path="/" component={App} />
-      <Route path='/movies' component={MoviesPage}/>
-    </Router>
+    <App />
   </Provider>,
   document.getElementById('root')
 );
