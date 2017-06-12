@@ -3,6 +3,7 @@ import {
   BrowserRouter as Router, 
   Route 
 } from 'react-router-dom';
+import NavBar from '../components/NavBar';
 import MoviesPage from './MoviesPage';
 
 class App extends Component {
@@ -10,6 +11,7 @@ class App extends Component {
     return (
       <Router>
         <div>
+          <NavBar />
           <Route exact path="/" render={() => <div>Home</div>} />
           <Route path='/movies' component={MoviesPage}/>
         </div>
