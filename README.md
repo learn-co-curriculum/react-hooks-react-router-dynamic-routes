@@ -11,7 +11,7 @@ In the previous lesson, we saw how to have routes dynamically render different c
 
 ## Master Detail Without Routes
 
-Have you ever used Apple's Messages app for your Mac? How about GMail? What about YouTube? All of those apps use some version of a "Master-Detail" interface. This is when there is something pertaining to the entire resource, such as a list of all messages, videos, or emails, and some more detailed display of a specific item or action on another portion of the screen. Clicking on a new item in the list changes which item we have selected.
+Have you ever used Apple's Messages app for your Mac? How about Gmail? What about YouTube? All of those apps use some version of a "Master-Detail" interface. This is when there is something pertaining to the entire resource, such as a list of all messages, videos, or emails, and some more detailed display of a specific item or action on another portion of the screen. Clicking on a new item in the list changes which item we have selected.
 
 ## Nesting
 
@@ -43,7 +43,7 @@ const mapStateToProps = (state) => {
 export default connect(mapStateToProps)(MoviesPage);
 ```
 
-We using the __mapStateToProps()__ function to pull the `movies` property from our store's state and attach it to the `props` of this component. As you see, our __MoviesPage__ just renders out a __MoviesList__ component. In this case, our __MoviesPage__ component is purely presentational.
+We are using the __mapStateToProps()__ function to pull the `movies` property from our store's state and attach it to the `props` of this component. As you see, our __MoviesPage__ just renders out a __MoviesList__ component. In this case, our __MoviesPage__ component is purely presentational.
 
 Let's create our MoviesList component to render __React Router__ Links for each movie. 
 
