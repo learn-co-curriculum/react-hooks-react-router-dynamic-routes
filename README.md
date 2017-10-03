@@ -15,7 +15,7 @@ Have you ever used Apple's Messages app for your Mac? How about Gmail? What abou
 
 ## Nesting
 
-With __React-Router__, we can make accomplish the master detail pattern by making our components children of each other. Take YouTube for example. Let's pretend that visiting `/videos` displays a list of videos. Clicking on any video keeps our list of videos on the page, but also displays details on the selected video. This should be updated by the URL - the URL should have changed to `/videos/:videoId`. The VideoDetail in this case is a 'Nested Component' of `'/videos'` - it will always have the list rendered before it.
+With __React-Router__, we can make the master-detail pattern by making our components children of each other. Take YouTube for example. Let's pretend that visiting `/videos` displays a list of videos. Clicking on any video keeps our list of videos on the page, but also displays details on the selected video. This should be updated by the URL - the URL should have changed to `/videos/:videoId`. The VideoDetail in this case is a 'Nested Component' of `'/videos'` - it will always have the list rendered before it.
 
 ## Code Along
 
@@ -72,7 +72,7 @@ export default MoviesList;
 
 Right now, we're using __React Router__ to display the __MoviesPage__ component when the url is `/movies` (You can look at the code in `/src/containers/App.js`). Let's add in our first nested route so that going to '/movies/:movieId' will display details about a given movie using a __MoviesShow__ component.
 
-let's create our __MoviesShow__ component. Later on, we will see that this component will need to connect to the store in order to figure out which Movie it should render, but first let's put it in our `containers` directory.
+Let's create our __MoviesShow__ component. Later on, we will see that this component will need to connect to the store in order to figure out which Movie it should render, but first let's put it in our `containers` directory.
 
 >Note: Remember, containers are components that are directly connected to the store via the connect function.   
 
@@ -148,4 +148,5 @@ Awesome! Refresh the page at `/movies`. Now, clicking a link changes the route, 
 
 ### Summary
 
-So far we saw how to set up our nested routes. We do so by making two `Route` componets. One `Route` component that renders a component if it is a perfect match with the url or the nested `Route` if it includes the `match.url` and the nested key(in this case :movieId).
+So far we saw how to set up our nested routes. We do so by making two `Route` components. One `Route` component that renders a component if it is a perfect match with the url or the nested `Route` if it includes the `match.url` and the nested key (in this case :movieId).
+<p class='util--hide'>View <a href='https://learn.co/lessons/react-router-nested-routes'>React Router Nested Routes</a> on Learn.co and start learning to code for free.</p>
