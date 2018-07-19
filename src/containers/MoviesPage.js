@@ -1,17 +1,17 @@
-// ./src/containers/MoviesPage.js
+// .src/containers/MoviesPage.js
 import React from 'react';
-import { connect } from 'react-redux';
+import { Route } from 'react-router-dom';
 import MoviesList from '../components/MoviesList';
+import MovieShow from './MovieShow';
 
-const MoviesPage = ({ movies }) => 
+const MoviesPage = ({ match, movies }) => (
   <div>
     <MoviesList movies={movies} />
-  </div>;
+    <Route exact path={match.url} render={() => (
+      <h3>Please select a Movie from the list.</h3>
+    )}/>
+  <Route path={`${match.url}/:movieId`} render={routerProps => <MovieShow {...routerProps} movies={movies} /> }/>
+  </div>
+)
 
-const mapStateToProps = (state) => {
-  return {
-    movies: state.movies
-  };
-}
-
-export default connect(mapStateToProps)(MoviesPage);
+export default MoviesPage
