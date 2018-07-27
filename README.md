@@ -125,17 +125,17 @@ router links.
 Right now, we're using __React Router__ to display the __MoviesPage__ component
 when the url is `/movies`. We'll need to add in our first nested route within
 __MoviesPage__ so that going to '/movies/:movieId' will display details about a
-given movie using a __MoviesShow__ component.
+given movie using a __MovieShow__ component.
 
-Before that, let's create our __MoviesShow__ component. Later on, we will
+Before that, let's create our __MovieShow__ component. Later on, we will
 see that this component will need to dynamically figure out which Movie it
 should render.
 
 ```javascript
-// ./src/containers/MoviesShow.js
+// ./src/containers/MovieShow.js
 import React from 'react';
 
-const MoviesShow = props => {
+const MovieShow = props => {
 
   return (
     <div>
@@ -144,7 +144,7 @@ const MoviesShow = props => {
   );
 }
 
-export default MoviesShow;
+export default MovieShow;
 ```
 
 Next, we need to add a nested route in our `src/containers/MoviesPage.js` file
@@ -205,7 +205,7 @@ export default MoviesList;
 
 Refresh the page at `/movies`. Now, clicking a link changes the route,
 but we're not actually seeing any content about that movie that would be in our
-MoviesShow page. You should only see the text `Movies Show Component!`.
+MovieShow page. You should only see the text `Movies Show Component!`.
 
 Just as we saw with __App__ the data we want to display on a particular
 __MovieShow__ page is available in its parent, __MoviesPage__, as props. In
@@ -239,7 +239,7 @@ means we'll need to modify our __MovieShow__ page:
 ```js
 import React from 'react';
 
-const MoviesShow = ({match, movies}) => {
+const MovieShow = ({match, movies}) => {
   return (
     <div>
       <h3>{ movies[match.params.movieId].title }</h3>
@@ -247,7 +247,7 @@ const MoviesShow = ({match, movies}) => {
   );
 }
 
-export default MoviesShow;
+export default MovieShow;
 ```
 
 Here, we've got our `movies` as an object in props. We've also got our Router
