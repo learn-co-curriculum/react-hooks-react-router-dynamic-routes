@@ -84,7 +84,7 @@ export default MoviesPage
 ```
 
 At the moment, our __MoviesPage__ component is purely presentational. It is
-simply middle component between __App__ and __MoviesList__, but we will come
+simply the middle component between __App__ and __MoviesList__, but we will come
 back to this component in a moment. Right now, if we try to run our React app,
 we get an error because __MovieList__ is not defined yet!
 
