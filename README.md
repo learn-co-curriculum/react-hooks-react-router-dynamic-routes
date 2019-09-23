@@ -209,7 +209,7 @@ MovieShow page. You should only see the text `Movies Show Component!`.
 
 Just as we saw with __App__ the data we want to display on a particular
 __MovieShow__ page is available in its parent, __MoviesPage__, as props. In
-order for __MovieShow__ to display this content, we will need make our movies
+order for __MovieShow__ to display this content, we will need to make our movies
 collection available within __MovieShow__:
 
 ```javascript
