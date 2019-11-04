@@ -207,7 +207,7 @@ see that this component will need to dynamically figure out which Movie it
 should render.
 
 ```javascript
-// ./src/containers/MovieShow.js
+// ./src/components/MovieShow.js
 import React from 'react';
 
 const MovieShow = props => {
