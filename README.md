@@ -359,7 +359,7 @@ Here, we've got our `movies` as an object in props. We've also got our Router
 props - from which we've extracted `match`. Within the `match` object is
 `params`. In this case, we only have the one parameter, `movieId`, which we
 defined in `MoviesPage`. Combining info from these two props lets us access the
-specific movie that's key matches the `movieId` from the URL path, resulting in
+specific movie whose key matches the `movieId` from the URL path, resulting in
 the correct movie title being displayed!
 
 We've succeeded in creating a "Master-Detail" interface - the list of movies is
