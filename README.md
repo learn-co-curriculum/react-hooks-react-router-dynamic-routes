@@ -334,8 +334,8 @@ export default MoviesPage
 
 Now, all the key/value pairs within `routerProps` are also passed into
 `MovieShow` as props. Just like before, one of the props we receive from the
-`Route` is `match`, and `match` happens to contain **_all the parameters from
-the URL!_** These parameters are stored as key/value pairs in `match.params`.
+`Route` is `match`, and `match` contains **all the parameters from
+the URL!** These parameters are stored as key/value pairs in `match.params`.
 The key corresponds to whatever we named the parameter in our `Route`, so in
 this case, the parameter will `movieId`. We can update `MovieShow` to utilize
 this parameter in conjunction with the `movies` data that was passed down:
