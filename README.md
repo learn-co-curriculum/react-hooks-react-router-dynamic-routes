@@ -33,7 +33,7 @@ the other for the details of a specific item. We could call them `List` and
 `Item`. Then, we create _one_ parent component for both that handles state. The
 parent component could keep track of all the list data and which particular item
 is currently selected, and pass down props to both components. This would work,
-but there are limitations. One problem with this set up is that changing state
+but there are limitations. One problem with this setup is that changing state
 won't change the URL, meaning there is no way to provide a link directly to one
 particular item from our list of resources.
 
@@ -108,15 +108,16 @@ case, that is _all_ of our components.
 Notice what is happening on the second `Route`. When rendering a component
 through a `Route` with the `render` prop, the function accepts an argument,
 `routerProps`. When the path matches the URL, the `Route` will call the function
-inside `render` and pass in the current information available able the route,
+inside `render` and pass in the current information available about the route,
 including the URL path that caused the `Route` to render. This is not possible
 with the regular `component` prop on `Route`s we've seen before.
 
 So, if the URL path matches `/movies`, the function inside `render` is called.
-The object that is passed in, `routerProps`, get passed in as props. Using the
-spread operator (`{...routerProps}`) will result in the creation of props for
-each key present inside the `routerProps` object. This isn't vital but is a
-helpful way to pass many props in without too much code clutter.
+The object that is passed in, `routerProps`, gets passed to the `MoviesPage`
+component as props. Using the spread operator (`{...routerProps}`) will result 
+in the creation of props for each key present inside the `routerProps` object. 
+This isn't vital but is a helpful way to pass many props in without too much 
+code clutter.
 
 So, the component, `MoviesPage`, receives props _from_ the `Route` that contain
 information on the route. In addition, we can also pass in other props, as we
@@ -231,11 +232,16 @@ route matches `/movies/:movieId`.
 import React from 'react';
 import { Route } from 'react-router-dom';
 import MoviesList from '../components/MoviesList';
+// import the `MovieShow` component:
 import MovieShow from '../components/MovieShow';
 
+// Here we add `match` to the arguments so we can access the path information 
+// in `routerProps` that is passed from App.js 
 const MoviesPage = ({ match, movies }) => (
   <div>
     <MoviesList movies={movies} />
+    // We also add a `Route` component that will render `MovieShow`
+    // when a movie is selected
     <Route path={`${match.url}/:movieId`} component={MovieShow}/>
   </div>
 )
@@ -277,9 +283,8 @@ export default MoviesList;
 ```
 
 Refresh the page at `/movies`. Now, clicking a link changes the route, but we're
-not actually seeing any content about that movie that would be on our MovieShow
-page. You should only see the text `Movies Show Component!` under the
-navigation and movie links.
+not actually seeing any content about that movie on our MovieShow page. You should 
+only see the text `Movies Show Component!` under the navigation and movie links.
 
 Just as we saw with `App`, the data we want to display on a particular
 `MovieShow` page is available in its parent, `MoviesPage`, as props. For
@@ -296,6 +301,7 @@ import MovieShow from '../components/MovieShow';
 const MoviesPage = ({ match, movies }) => (
   <div>
     <MoviesList movies={movies} />
+    // Adding code to pass the movies to the `MovieShow` component
     <Route path={`${match.url}/:movieId`} component={<MovieShow movies={movies} /> }/>
   </div>
 )
@@ -325,6 +331,8 @@ import MovieShow from '../components/MovieShow';
 const MoviesPage = ({ match, movies }) => (
   <div>
     <MoviesList movies={movies} />
+    // Here we replace the `component` prop with the `render` prop so we can pass the 
+    // route information to the `MovieShow` component
     <Route path={`${match.url}/:movieId`} render={routerProps => <MovieShow {...routerProps} movies={movies} /> }/>
   </div>
 )
@@ -337,16 +345,20 @@ Now, all the key/value pairs within `routerProps` are also passed into
 `Route` is `match`, and `match` contains **all the parameters from
 the URL!** These parameters are stored as key/value pairs in `match.params`.
 The key corresponds to whatever we named the parameter in our `Route`, so in
-this case, the parameter will `movieId`. We can update `MovieShow` to utilize
+this case, the parameter will be `movieId`. We can update `MovieShow` to utilize
 this parameter in conjunction with the `movies` data that was passed down:
 
 ```js
 // .src/components/MovieShow.js
 import React from 'react';
 
+// Here we add `match` to the arguments so we can access the path information 
+// in `routerProps` that is passed from MoviesPage.js 
 const MovieShow = ({match, movies}) => {
   return (
     <div>
+      // And here we access the `movieId` stored in match.params to render 
+      // information about the selected movie
       <h3>{ movies[match.params.movieId].title }</h3>
     </div>
   );
@@ -386,6 +398,7 @@ import MovieShow from '../components/MovieShow';
 const MoviesPage = ({ match, movies }) => (
   <div>
     <MoviesList movies={movies} />
+    // Adding code to show a message to the user to select a movie if they haven't yet
     <Route exact path={match.url} render={() => <h3>Choose a movie from the list above</h3>}/>
     <Route path={`${match.url}/:movieId`} render={routerProps => <MovieShow {...routerProps} movies={movies} /> }/>
   </div>
@@ -405,8 +418,8 @@ To briefly review - we are able to nest `Route`s within each other. Using the
 Router props we receive from the top-level `Route`, we can nest a second `Route`
 that extends the URL path of the first. We can actually nest `Route`s as many
 times as we would like, so if we wanted, we could go fully RESTful and create
-nested `Route`s _inside_ `MovieShow`, allowing us to write URL paths that would
-look something like this:
+nested `Route`s inside `MovieShow` as well, allowing us to write URL paths that 
+would look something like this:
 
 ```test
 http://localhost:3000/movies/:movieId/edit
