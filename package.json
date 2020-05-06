@@ -21,7 +21,7 @@
   "scripts": {
     "start": "react-scripts start",
     "build": "react-scripts build",
-    "test": "mocha -w ./test/*.test.js",
+    "test": "mocha --timeout 5000 -w ./test/*.test.js",
     "eject": "react-scripts eject"
   },
   "devDependencies": {
