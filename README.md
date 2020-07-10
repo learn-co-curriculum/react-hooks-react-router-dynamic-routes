@@ -442,8 +442,3 @@ data dynamically.
 In the early days of the internet, we would have had to create separate HTML
 pages **_for each movie in this application_**. Now, with React, we can write
 abstract components that fill in the data for each 'page' on demand. Very cool!
-
-<p
-class='util--hide'>View <a
-href='https://learn.co/lessons/react-router-nested-routes'>React Router Nested
-Routes</a> on Learn.co and start learning to code for free.</p>
