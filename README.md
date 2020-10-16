@@ -442,3 +442,4 @@ data dynamically.
 In the early days of the internet, we would have had to create separate HTML
 pages **_for each movie in this application_**. Now, with React, we can write
 abstract components that fill in the data for each 'page' on demand. Very cool!
+
