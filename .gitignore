@@ -13,3 +13,9 @@ build
 .DS_Store
 .env
 npm-debug.log
+
+# Learn-specific .results.json
+.results.json
+
+# Ignore ESLint files
+.eslintcache
