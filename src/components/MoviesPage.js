@@ -1,11 +1,25 @@
-import React from 'react';
-import { Route } from 'react-router-dom';
-import MoviesList from './MoviesList';
+import React from "react";
+import { Route, useRouteMatch } from "react-router-dom";
+import MoviesList from "./MoviesList";
+import MovieShow from "./MovieShow";
 
-const MoviesPage = ({ movies }) => (
-  <div>
-    <MoviesList movies={movies} />
-  </div>
-)
+const MoviesPage = ({ movies }) => {
+  const match = useRouteMatch();
 
-export default MoviesPage
+  return (
+    <div>
+      <MoviesList movies={movies} />
+
+      {/* Adding code to show a message to the user to select a movie if they haven't yet */}
+      <Route exact path={match.url}>
+        <h3>Choose a movie from the list above</h3>
+      </Route>
+
+      <Route path={`${match.url}/:movieId`}>
+        <MovieShow movies={movies} />
+      </Route>
+    </div>
+  );
+};
+
+export default MoviesPage;
