@@ -209,7 +209,7 @@ route matches `/movies/:movieId`.
 import React from "react";
 // import the custom `useRouteMatch` hook from React Router
 import { Route, useRouteMatch } from "react-router-dom";
-import MoviesList from "../components/MoviesList";
+import MoviesList from "./MoviesList";
 // import the MovieShow component
 import MovieShow from "./MovieShow";
 
@@ -283,10 +283,10 @@ Just as we saw with `App`, the data we want to display on a particular
 available within `MovieShow`.
 
 ```javascript
-// .src/containers/MoviesPage.js
+// .src/components/MoviesPage.js
 import React from "react";
 import { Route, useRouteMatch } from "react-router-dom";
-import MoviesList from "../components/MoviesList";
+import MoviesList from "./MoviesList";
 import MovieShow from "./MovieShow";
 
 const MoviesPage = ({ movies }) => {
@@ -369,10 +369,10 @@ default `Route`, so we don't see anything. If we want to create a default
 `Route` here, we can do so using the `match` from `useRouteMatch()` once again:
 
 ```js
-// .src/containers/MoviesPage.js
+// .src/components/MoviesPage.js
 import React from "react";
 import { Route, useRouteMatch } from "react-router-dom";
-import MoviesList from "../components/MoviesList";
+import MoviesList from "./MoviesList";
 import MovieShow from "./MovieShow";
 
 const MoviesPage = ({ movies }) => {
