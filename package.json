@@ -1,39 +1,44 @@
 {
-  "name": "nested-routes-lab",
+  "name": "react-router-dynamic-routes",
   "version": "0.1.0",
   "private": true,
-  "babel": {
-    "presets": [
-      "airbnb",
-      "env",
-      "stage-0",
-      "react"
-    ]
-  },
   "dependencies": {
-    "mocha-multi": "^1.0.1",
-    "react": "^16.4.1",
-    "react-dom": "^16.4.1",
-    "react-router-dom": "^4.3.1",
-    "react-scripts": "1.1.4",
-    "webpack": "^3.11.0"
+    "@testing-library/jest-dom": "^5.11.4",
+    "@testing-library/react": "^11.1.0",
+    "@testing-library/user-event": "^12.1.10",
+    "react": "^17.0.1",
+    "react-dom": "^17.0.1",
+    "react-router-dom": "^5.2.0",
+    "react-scripts": "4.0.1"
   },
   "scripts": {
     "start": "react-scripts start",
     "build": "react-scripts build",
-    "test": "mocha --timeout 5000 -w ./test/*.test.js",
+    "test": "echo \".results.json\" && react-scripts test --reporters=@ihollander/jest-learn-reporter --reporters=default --watchAll",
     "eject": "react-scripts eject"
   },
+  "eslintConfig": {
+    "extends": [
+      "react-app"
+    ]
+  },
+  "browserslist": {
+    "production": [
+      ">0.2%",
+      "not dead",
+      "not op_mini all"
+    ],
+    "development": [
+      "last 1 chrome version",
+      "last 1 firefox version",
+      "last 1 safari version"
+    ]
+  },
   "devDependencies": {
-    "babel-core": "^6.26.3",
-    "babel-preset-airbnb": "^2.5.1",
-    "babel-preset-env": "^1.7.0",
-    "babel-preset-react": "^6.24.1",
-    "babel-preset-stage-0": "^6.24.1",
-    "chai": "^4.1.2",
-    "enzyme": "^3.3.0",
-    "enzyme-adapter-react-16": "^1.1.1",
-    "mocha": "^5.2.0",
-    "sinon": "^6.1.0"
+    "@ihollander/jest-learn-reporter": "^1.0.1",
+    "mocha": "^8.2.1",
+    "chai": "^4.2.0",
+    "enzyme": "^3.11.0",
+    "@wojtekmaj/enzyme-adapter-react-17": "^0.3.1"
   }
 }
