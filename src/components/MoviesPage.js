@@ -3,7 +3,7 @@ import { Route, useRouteMatch } from "react-router-dom";
 import MoviesList from "./MoviesList";
 import MovieShow from "./MovieShow";
 
-const MoviesPage = ({ movies }) => {
+function MoviesPage({ movies }) {
   const match = useRouteMatch();
 
   return (
@@ -20,6 +20,6 @@ const MoviesPage = ({ movies }) => {
       </Route>
     </div>
   );
-};
+}
 
 export default MoviesPage;

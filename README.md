@@ -111,11 +111,13 @@ import React from "react";
 import { Route } from "react-router-dom";
 import MoviesList from "./MoviesList";
 
-const MoviesPage = ({ movies }) => (
-  <div>
-    <MoviesList movies={movies} />
-  </div>
-);
+function MoviesPage({ movies }) {
+  return (
+    <div>
+      <MoviesList movies={movies} />
+    </div>
+  );
+}
 
 export default MoviesPage;
 ```
@@ -133,7 +135,7 @@ each movie:
 import React from "react";
 import { Link } from "react-router-dom";
 
-const MoviesList = ({ movies }) => {
+function MoviesList({ movies }) {
   const renderMovies = Object.keys(movies).map((movieID) => (
     <li key={movieID}>
       <Link to={`/movies/${movieID}`}>{movies[movieID].title}</Link>
@@ -141,7 +143,7 @@ const MoviesList = ({ movies }) => {
   ));
 
   return <ul>{renderMovies}</ul>;
-};
+}
 
 export default MoviesList;
 ```
@@ -185,13 +187,13 @@ should render.
 // ./src/components/MovieShow.js
 import React from "react";
 
-const MovieShow = (props) => {
+function MovieShow() {
   return (
     <div>
       <h3>Movies Show Component!</h3>
     </div>
   );
-};
+}
 
 export default MovieShow;
 ```
@@ -209,7 +211,7 @@ import MoviesList from "./MoviesList";
 // import the MovieShow component
 import MovieShow from "./MovieShow";
 
-const MoviesPage = ({ movies }) => {
+function MoviesPage({ movies }) {
   // useRouteMatch returns a special object with information about
   // the currently matched route
   const match = useRouteMatch();
@@ -228,13 +230,13 @@ const MoviesPage = ({ movies }) => {
       </Route>
     </div>
   );
-};
+}
 
 export default MoviesPage;
 ```
 
 Above, we've imported our `MovieShow` component along with the
-[`useRouteMatch`][useroutematch] hook from React Router, and added a `Route`
+[`useRouteMatch`][use-route-match] hook from React Router, and added a `Route`
 component. Calling `useRouteMatch()` inside our component gives us an object
 that contains the current URL. Using `match`, we can show stuff depending on
 what the `match.url` returns. We do this because we want the `Route` inside
@@ -251,7 +253,7 @@ since each `movieID` is different.
 import React from "react";
 import { Link } from "react-router-dom";
 
-const MoviesList = ({ movies }) => {
+function MoviesList({ movies }) {
   const renderMovies = Object.keys(movies).map((movieID) => (
     <li key={movieID}>
       <Link to={`/movies/${movieID}`}>{movies[movieID].title}</Link>
@@ -259,7 +261,7 @@ const MoviesList = ({ movies }) => {
   ));
 
   return <ul>{renderMovies}</ul>;
-};
+}
 
 export default MoviesList;
 ```
@@ -280,7 +282,7 @@ import { Route, useRouteMatch } from "react-router-dom";
 import MoviesList from "./MoviesList";
 import MovieShow from "./MovieShow";
 
-const MoviesPage = ({ movies }) => {
+function MoviesPage({ movies }) {
   const match = useRouteMatch();
 
   return (
@@ -292,7 +294,7 @@ const MoviesPage = ({ movies }) => {
       </Route>
     </div>
   );
-};
+}
 
 export default MoviesPage;
 ```
@@ -307,7 +309,7 @@ into `MovieShow`. Any guess as to how we might do that?
 
 Just like we can use the `useRouteMatch` hook to get information about the URL
 for the current route, we can also use another hook to get the dynamic `params`
-from the URL: the [`useParams`][useparams] hook!
+from the URL: the [`useParams`][use-params] hook!
 
 ```js
 // .src/components/MovieShow.js
@@ -316,7 +318,7 @@ import { useParams } from "react-router-dom";
 
 // Here we add `match` to the arguments so we can access the path information
 // in `routerProps` that is passed from MoviesPage.js
-const MovieShow = ({ movies }) => {
+function MovieShow({ movies }) {
   // call useParams to access the `params` from the url:
   // the dynamic portion of our /movies/:movieId path
   const params = useParams();
@@ -331,7 +333,7 @@ const MovieShow = ({ movies }) => {
       <h3>{movies[params.movieId].title}</h3>
     </div>
   );
-};
+}
 
 export default MovieShow;
 ```
@@ -364,7 +366,7 @@ import { Route, useRouteMatch } from "react-router-dom";
 import MoviesList from "./MoviesList";
 import MovieShow from "./MovieShow";
 
-const MoviesPage = ({ movies }) => {
+function MoviesPage({ movies }) {
   const match = useRouteMatch();
 
   return (
@@ -381,7 +383,7 @@ const MoviesPage = ({ movies }) => {
       </Route>
     </div>
   );
-};
+}
 
 export default MoviesPage;
 ```
@@ -428,5 +430,5 @@ abstract components that fill in the data for each 'page' on demand. Very cool!
 - [useParams][]
 
 [object destructuring]: https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Operators/Destructuring_assignment
-[useroutematch]: https://reactrouter.com/web/api/Hooks/useroutematch
-[useparams]: https://reactrouter.com/web/api/Hooks/useparams
+[use-route-match]: https://reactrouter.com/web/api/Hooks/useroutematch
+[use-params]: https://reactrouter.com/web/api/Hooks/useparams
