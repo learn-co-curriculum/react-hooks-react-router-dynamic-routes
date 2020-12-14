@@ -77,11 +77,11 @@ component. `App` has some dummy movie data provided in state for us (normally,
 we would likely be fetching this info).
 
 ```js
-  const [movies, setMovies] = useState({
-    1: { id: 1, title: 'A River Runs Through It' },
-    2: { id: 2, title: 'Se7en' },
-    3: { id: 3, title: 'Inception' }
-  })
+const [movies, setMovies] = useState({
+  1: { id: 1, title: "A River Runs Through It" },
+  2: { id: 2, title: "Se7en" },
+  3: { id: 3, title: "Inception" },
+});
 ```
 
 Our `index.js` file also has `Router` wrapping our `App`. All JSX wrapped within
@@ -91,14 +91,14 @@ case, that is _all_ of our components.
 `App` has two `Route` elements:
 
 ```js
-  <Switch>
-    <Route path="/movies">
-      <MoviesPage movies={movies}/>
-    </Route>
-    <Route exact path="/">
-      <div>Home</div>
-    </Route>
-  </Switch>
+<Switch>
+  <Route path="/movies">
+    <MoviesPage movies={movies} />
+  </Route>
+  <Route exact path="/">
+    <div>Home</div>
+  </Route>
+</Switch>
 ```
 
 Looking at the `MoviesPage` component, this component is responsible for
@@ -107,17 +107,17 @@ loading our `MoviesList` component and passing in the movies we received from
 
 ```javascript
 // ./src/components/MoviesPage.js
-import React from 'react';
-import { Route } from 'react-router-dom';
-import MoviesList from './MoviesList';
+import React from "react";
+import { Route } from "react-router-dom";
+import MoviesList from "./MoviesList";
 
 const MoviesPage = ({ movies }) => (
   <div>
     <MoviesList movies={movies} />
   </div>
-)
+);
 
-export default MoviesPage
+export default MoviesPage;
 ```
 
 At the moment, our `MoviesPage` component is purely presentational. It is
@@ -130,21 +130,17 @@ each movie:
 
 ```js
 // ./src/components/MoviesList.js
-import React from 'react';
-import { Link } from 'react-router-dom';
+import React from "react";
+import { Link } from "react-router-dom";
 
 const MoviesList = ({ movies }) => {
-  const renderMovies = Object.keys(movies).map(movieID => (
+  const renderMovies = Object.keys(movies).map((movieID) => (
     <li key={movieID}>
       <Link to={`/movies/${movieID}`}>{movies[movieID].title}</Link>
     </li>
   ));
 
-  return (
-    <ul>
-      {renderMovies}
-    </ul>
-  );
+  return <ul>{renderMovies}</ul>;
 };
 
 export default MoviesList;
@@ -214,7 +210,7 @@ import MoviesList from "./MoviesList";
 import MovieShow from "./MovieShow";
 
 const MoviesPage = ({ movies }) => {
-  // useRouteMatch returns a special object with information about 
+  // useRouteMatch returns a special object with information about
   // the currently matched route
   const match = useRouteMatch();
   console.log(match);
@@ -222,7 +218,7 @@ const MoviesPage = ({ movies }) => {
   return (
     <div>
       <MoviesList movies={movies} />
-      
+
       {/* 
         we can use the current URL from the `match` object as part of the path,
         this will generate a url like "/movies/:movieId"
@@ -235,11 +231,10 @@ const MoviesPage = ({ movies }) => {
 };
 
 export default MoviesPage;
-
 ```
 
 Above, we've imported our `MovieShow` component along with the
-[`useRouteMatch`][useRouteMatch] hook from React Router, and added a `Route`
+[`useRouteMatch`][useroutematch] hook from React Router, and added a `Route`
 component. Calling `useRouteMatch()` inside our component gives us an object
 that contains the current URL. Using `match`, we can show stuff depending on
 what the `match.url` returns. We do this because we want the `Route` inside
@@ -253,28 +248,24 @@ since each `movieID` is different.
 
 ```javascript
 // ./src/components/MoviesList.js
-import React from 'react';
-import { Link } from 'react-router-dom';
+import React from "react";
+import { Link } from "react-router-dom";
 
 const MoviesList = ({ movies }) => {
-  const renderMovies = Object.keys(movies).map(movieID => (
+  const renderMovies = Object.keys(movies).map((movieID) => (
     <li key={movieID}>
       <Link to={`/movies/${movieID}`}>{movies[movieID].title}</Link>
     </li>
   ));
 
-  return (
-    <ul>
-      {renderMovies}
-    </ul>
-  );
+  return <ul>{renderMovies}</ul>;
 };
 
 export default MoviesList;
 ```
 
 Refresh the page at `/movies`. Now, clicking a link changes the route, but we're
-not actually seeing any content about that movie on our MovieShow page. You should 
+not actually seeing any content about that movie on our MovieShow page. You should
 only see the text `Movies Show Component!` under the navigation and movie links.
 
 Just as we saw with `App`, the data we want to display on a particular
@@ -296,7 +287,6 @@ const MoviesPage = ({ movies }) => {
     <div>
       <MoviesList movies={movies} />
       <Route path={`${match.url}/:movieId`}>
-        
         {/* adding the movies object as a prop to MovieShow */}
         <MovieShow movies={movies} />
       </Route>
@@ -305,7 +295,6 @@ const MoviesPage = ({ movies }) => {
 };
 
 export default MoviesPage;
-
 ```
 
 This isn't enough though - `MovieShow` now has all the movies, but it doesn't
@@ -318,7 +307,7 @@ into `MovieShow`. Any guess as to how we might do that?
 
 Just like we can use the `useRouteMatch` hook to get information about the URL
 for the current route, we can also use another hook to get the dynamic `params`
-from the URL: the [`useParams`][useParams] hook!
+from the URL: the [`useParams`][useparams] hook!
 
 ```js
 // .src/components/MovieShow.js
@@ -365,7 +354,7 @@ With our main task completed, let's take a quick step back and ask a question -
 what happens in this app when we visit `http://localhost:3000/movies` without a
 particular `movieId` parameter? Well, `MoviesPage` renders due to the top-level
 `/movies` `Route`, but `MoviesPage` will only render `MoviesList`. There is no
-default `Route`, so we don't see anything. If we want to create a default 
+default `Route`, so we don't see anything. If we want to create a default
 `Route` here, we can do so using the `match` from `useRouteMatch()` once again:
 
 ```js
@@ -381,7 +370,7 @@ const MoviesPage = ({ movies }) => {
   return (
     <div>
       <MoviesList movies={movies} />
-      
+
       {/* Adding code to show a message to the user to select a movie if they haven't yet */}
       <Route exact path={match.url}>
         <h3>Choose a movie from the list above</h3>
@@ -408,7 +397,7 @@ To briefly review - we are able to nest `Route`s within each other. Using the
 Router props we receive from the top-level `Route`, we can nest a second `Route`
 that extends the URL path of the first. We can actually nest `Route`s as many
 times as we would like, so if we wanted, we could go fully RESTful and create
-nested `Route`s inside `MovieShow` as well, allowing us to write URL paths that 
+nested `Route`s inside `MovieShow` as well, allowing us to write URL paths that
 would look something like this:
 
 ```test
@@ -439,5 +428,5 @@ abstract components that fill in the data for each 'page' on demand. Very cool!
 - [useParams][]
 
 [object destructuring]: https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Operators/Destructuring_assignment
-[useRouteMatch]: https://reactrouter.com/web/api/Hooks/useroutematch
-[useParams]: https://reactrouter.com/web/api/Hooks/useparams
+[useroutematch]: https://reactrouter.com/web/api/Hooks/useroutematch
+[useparams]: https://reactrouter.com/web/api/Hooks/useparams
