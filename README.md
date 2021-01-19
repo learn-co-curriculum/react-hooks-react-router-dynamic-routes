@@ -70,7 +70,7 @@ that renders `Item` when the path matches `/videos/:videoId`.
 
 Let's build this out!
 
-#### Rendering Our List
+## Rendering Our List
 
 To begin, let's take a look at our starter code. First, we have our `App`
 component. `App` has some dummy movie data provided in state for us (normally,
@@ -426,8 +426,8 @@ abstract components that fill in the data for each 'page' on demand. Very cool!
 
 ## Resources
 
-- [useRouteMatch][]
-- [useParams][]
+- [useRouteMatch][use-route-match]
+- [useParams][use-params]
 
 [object destructuring]: https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Operators/Destructuring_assignment
 [use-route-match]: https://reactrouter.com/web/api/Hooks/useroutematch
