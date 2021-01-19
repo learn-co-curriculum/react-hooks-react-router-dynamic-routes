@@ -364,6 +364,8 @@ import { Route, useRouteMatch } from "react-router-dom";
 import MoviesList from "./MoviesList";
 import MovieShow from "./MovieShow";
 
+// Here we add `match` to the arguments so we can access the path information
+// in `routerProps` that is passed from MoviesPage.js
 function MoviesPage({ movies }) {
   const match = useRouteMatch();
 
