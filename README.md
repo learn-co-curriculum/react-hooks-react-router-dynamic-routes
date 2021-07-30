@@ -46,7 +46,7 @@ video, the value is listed as part of the URL. This value is a URL parameter and
 allows for convenient sharing and bookmarking.
 
 We've seen already that we can use React Router to alter the URL of a React
-app. The challenge here though &mdash; how do we set up our `Route`s so that
+app. The challenge here though — how do we set up our `Route`s so that
 they can produce URLs with parameters that correspond to resources we want to
 display in our app?
 
@@ -63,7 +63,7 @@ the master-detail pattern by making our `Item` component the _child_ of the
 Think of YouTube again for a moment. Let's pretend that visiting `/videos`
 displays a list of videos. Clicking on any video should keep our list of videos
 on the page, but also display details on the selected video. This should be
-updated in the URL &mdash; the URL should change to `/videos/:videoId`, where
+updated in the URL — the URL should change to `/videos/:videoId`, where
 `:videoId` is a unique value (this is slightly different than how YouTube works
 but the concepts are similar).
 
@@ -300,9 +300,9 @@ function MoviesPage({ movies }) {
 export default MoviesPage;
 ```
 
-This isn't enough though &mdash; `MovieShow` now has all the movies, but it
+This isn't enough though — `MovieShow` now has all the movies, but it
 doesn't know _which_ movie it should display. This information is _only
-available from the URL_. Remember &mdash; when we click a `Link` to a movie, it
+available from the URL_. Remember — when we click a `Link` to a movie, it
 adds that movie's `id` to the URL as a **parameter**. We need to get that
 parameter out of the URL and into `MovieShow`.
 
@@ -344,7 +344,7 @@ case, we only have the one parameter, `movieId`, which we defined in the
 the specific movie whose key matches the `movieId` from the URL path, resulting
 in the correct movie title being displayed!
 
-We've succeeded in creating a "Master-Detail" interface &mdash; the list of
+We've succeeded in creating a "Master-Detail" interface — the list of
 movies is always present when viewing a particular movie's details. Clicking
 through the links changes the URL. With this setup, users of this site could
 bookmark or share the URL for a specific movie!
@@ -352,7 +352,7 @@ bookmark or share the URL for a specific movie!
 ### What Happens If We Only Visit the First Route?
 
 With our main task completed, let's take a quick step back and ask a question
-&mdash; what happens in this app when we visit `http://localhost:3000/movies`
+— what happens in this app when we visit `http://localhost:3000/movies`
 without a particular `movieId` parameter? Well, `MoviesPage` renders due to the
 top-level `/movies` `Route`, but `MoviesPage` will only render `MoviesList`.
 There is no default `Route`, so we don't see anything. If we want to create a
@@ -415,7 +415,7 @@ route from `useRouteMatch`. We define the parameter names in a `Route`'s path by
 prepending a colon (`:`) to the front of the name. This name will then show up
 as a key inside `params`.
 
-We can use parameters to look up specific data &mdash; in this case, matching
+We can use parameters to look up specific data — in this case, matching
 the key of a `movies` object with the URL parameter, `:movieId`, allowed us to
 display a particular movie's title.
 
