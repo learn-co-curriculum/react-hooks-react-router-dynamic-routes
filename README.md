@@ -80,7 +80,7 @@ To begin, let's take a look at our starter code. First, we have our `App`
 component. `App` has some dummy movie data provided in state for us (normally,
 we would likely be fetching this info).
 
-```js
+```jsx
 const [movies, setMovies] = useState({
   1: { id: 1, title: "A River Runs Through It" },
   2: { id: 2, title: "Se7en" },
@@ -94,7 +94,7 @@ case, that is _all_ of our components.
 
 `App` has two `Route` elements:
 
-```js
+```jsx
 <Switch>
   <Route path="/movies">
     <MoviesPage movies={movies} />
@@ -109,7 +109,7 @@ Looking at the `MoviesPage` component, this component is responsible for
 loading our `MoviesList` component and passing in the movies we received from
 `App`.
 
-```js
+```jsx
 // ./src/components/MoviesPage.js
 import React from "react";
 import { Route } from "react-router-dom";
@@ -133,7 +133,7 @@ error because `MoviesList` is not defined yet!
 
 Let's create our `MoviesList` component to render a `<Link>` for each movie:
 
-```js
+```jsx
 // ./src/components/MoviesList.js
 import React from "react";
 import { Link } from "react-router-dom";
@@ -163,7 +163,7 @@ information from the `movies` object, as we see with `movies[movieID].title`.
 
 In the `Link`, we've also used interpolation to create a dynamic path in `to`:
 
-```js
+```jsx
 to={`/movies/${movieID}`}
 ```
 
@@ -183,7 +183,7 @@ component.
 Before that, let's create our `MovieShow` component. Later on, we will see that
 this component will need to dynamically figure out which Movie it should render.
 
-```js
+```jsx
 // ./src/components/MovieShow.js
 import React from "react";
 
@@ -202,7 +202,7 @@ Next, we import `MovieShow` into `MoviesPage` and add a nested route in our
 `src/components/MoviesPage.js` file to display the `MovieShow` container if that
 route matches `/movies/:movieId`.
 
-```js
+```jsx
 // .src/components/MoviesPage.js
 import React from "react";
 // import the custom `useRouteMatch` hook from React Router
@@ -276,7 +276,7 @@ Just as we saw with `App`, the data we want to display on a particular
 `MovieShow` to display this content, we will need to make our movies collection
 available within `MovieShow`.
 
-```js
+```jsx
 // .src/components/MoviesPage.js
 import React from "react";
 import { Route, useRouteMatch } from "react-router-dom";
@@ -310,7 +310,7 @@ Just like we can use the `useRouteMatch` hook to get information about the URL
 for the current route, we can also use another hook to get the dynamic `params`
 from the URL: the [`useParams`][use-params] hook!
 
-```js
+```jsx
 // .src/components/MovieShow.js
 import React from "react";
 import { useParams } from "react-router-dom";
@@ -359,7 +359,7 @@ There is no default `Route`, so we don't see anything. If we want to create a
 default `Route` here, we can do so using the `match` from `useRouteMatch()` once
 again:
 
-```js
+```jsx
 // .src/components/MoviesPage.js
 import React from "react";
 import { Route, useRouteMatch } from "react-router-dom";
