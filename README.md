@@ -10,20 +10,22 @@
 ## Introduction
 
 Have you ever used Apple's Messages app for your Mac? What about YouTube? These
-apps use some version of a **master/detail** interface: there is some piece of the
-interface that provides access to the entire resource which we can use to select
-specific items from. The resource might be a list of all messages, videos, or
-emails. Clicking on one will trigger a more detailed display of that specific
-item or action on **another portion of the screen** instead of displaying an
-entirely new page. With this design, a user can navigate through many items in a
-list, looking at item details without ever leaving the page they are on.
+apps use some version of a list/item interface in which there is some piece of
+the interface that provides access to the entire resource which we can use to
+select specific items from. (This type of interface has traditionally been
+referred to as a master/detail pattern.) The resource might be a list of all
+messages, videos, or emails. Clicking on one will trigger a more detailed
+display of that specific item or action on **another portion of the screen**
+instead of displaying an entirely new page. With this design, a user can
+navigate through many items in a list, looking at item details without ever
+leaving the page they are on.
 
 Consider how we might create this sort of design in regular React, without using
-`Route`s: we could create two sibling components, one for the 'master' list, and
-the other for the details of a specific item. We could call them `List` and
-`Item`. Then, we create _one_ parent component for both that handles state. The
-parent component could keep track of all the list data and which particular item
-is currently selected, and pass down props to both components.
+`Route`s: we could create two sibling components, one for the list, and the
+other for the details of a specific item. We could call them `List` and `Item`.
+Then, we create _one_ parent component for both that handles state. The parent
+component could keep track of all the list data and which particular item is
+currently selected, and pass down props to both components.
 
 This would work, but there are limitations. One problem with this approach is
 that changing state won't change the URL, meaning there is no way to provide a
@@ -36,8 +38,8 @@ assigns unique values to each video (something like
 video, the value is listed as part of the URL. This value is a URL parameter and
 allows for convenient sharing and bookmarking.
 
-In this lesson, we will learn how to use React Router to set up the
-master/detail pattern. Specifically, we will learn how to:
+In this lesson, we will learn how to use React Router to set up this list/item
+pattern.Specifically, we will learn how to:
 
 - set up nested `Route`s for list and item components such that clicking on an
   item will display its details _along with_ the list
@@ -65,9 +67,8 @@ So far, we've only seen `Route`s side by side, but that won't really work in
 this example. When a list item is clicked, we want to see the details of that
 item, but **we still want the list to display**.
 
-Instead of listing two `Route`s side by side, we can use React Router to set up
-the master/detail pattern by making our `Item` component the _child_ of the
-`List` component.
+Instead of listing two `Route`s side by side, we can use React Router to make
+our `Item` component the _child_ of the `List` component.
 
 Think of YouTube again for a moment. Let's pretend that visiting `/videos`
 displays a `List` of videos. Clicking on any video should keep our list of
@@ -346,10 +347,10 @@ case, we only have the one parameter, `movieId`, which we defined in the
 the `params` object, then use that to access the movie from the `movies` object
 resulting in the correct movie title being displayed!
 
-We've succeeded in creating a master/detail interface — the list of
-movies is always present when viewing a particular movie's details. Clicking
-through the links changes the URL. With this setup, users of this site could
-bookmark or share the URL for a specific movie!
+We've succeeded in creating a list/item interface in which the list of movies is
+always present when viewing a particular movie's details. Clicking through the
+links changes the URL. With this setup, users of this site could bookmark or
+share the URL for a specific movie!
 
 ### Handling What Happens If We Only Visit the First Route
 
@@ -419,10 +420,9 @@ http://localhost:3000/movies/:movieId
 http://localhost:3000/movies/:movieId/edit
 ```
 
-In this lesson, we learned how to set up nested routes to create a
-**master/detail** interface. Specifically, we learned how we can display a list
-of items along with details about an individual item on the same page. To get
-this to work, we needed to complete the following steps:
+In this lesson, we learned how to set up nested routes to display a list of
+items along with details about an individual item on the same page. To get this
+to work, we needed to complete the following steps:
 
 - In the top-level component (`App.js` in this case), create our "parent" routes
   and render `<MoviesPage>`
