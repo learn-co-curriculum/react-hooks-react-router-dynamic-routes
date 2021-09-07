@@ -10,15 +10,13 @@
 ## Introduction
 
 Have you ever used Apple's Messages app for your Mac? What about YouTube? These
-apps use some version of a list/item interface in which there is some piece of
-the interface that provides access to the entire resource which we can use to
-select specific items from. (This type of interface has traditionally been
-referred to as a master/detail pattern.) The resource might be a list of all
-messages, videos, or emails. Clicking on one will trigger a more detailed
-display of that specific item or action on **another portion of the screen**
-instead of displaying an entirely new page. With this design, a user can
-navigate through many items in a list, looking at item details without ever
-leaving the page they are on.
+apps use a specific type of interface which consists of a list of all instances
+of a resource (messages, videos, emails, etc.) from which we can select specific
+items. Clicking on one will trigger a more detailed display of that specific
+item on **another portion of the screen** instead of displaying an entirely new
+page. (You may see this pattern referred to as the master/detail pattern.) With
+this design, a user can navigate through many items in a list, looking at item
+details without ever leaving the page they are on.
 
 Consider how we might create this sort of design in regular React, without using
 `Route`s: we could create two sibling components, one for the list, and the
@@ -39,7 +37,7 @@ video, the value is listed as part of the URL. This value is a URL parameter and
 allows for convenient sharing and bookmarking.
 
 In this lesson, we will learn how to use React Router to set up this list/item
-pattern.Specifically, we will learn how to:
+pattern. Specifically, we will learn how to:
 
 - set up nested `Route`s for list and item components such that clicking on an
   item will display its details _along with_ the list
