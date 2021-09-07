@@ -54,10 +54,10 @@ Our final component hierarchy will look like this:
         └── MovieShow
 ```
 
-The `App` component will render the `NavBar`, `Home` and `MoviesPage` components
-and is where we'll define our top-level `Route`s. The `MoviesPage` component
-will be the parent to the two presentational components, `MoviesList` and
-`MovieShow`, and is where we'll set up our nested route.
+The `App` component will render the `NavBar` and `MoviesPage` components and is
+where we'll define our top-level `Route`s. The `MoviesPage` component will be
+the parent to the two presentational components, `MoviesList` and `MovieShow`,
+and is where we'll set up our nested route.
 
 ## Nesting
 
@@ -246,8 +246,8 @@ object that contains the current URL. We have assigned that object to the
 variable `match`, which we then use to specify what content to render.
 Specifically, `match.url` gives us the `/videos` part of the url, and we append
 the `:movieId` for the particular video we want to display. `:movieId`
-represents a parameter. If we visit `http://localhost:3000/movies/1`, the
-`movieId` parameter would be `"1"`.
+represents a parameter. If we visit `http://localhost:3000/movies/1`, the value
+of `movieId` will be `"1"`.
 
 Going back to our `MoviesList` component, remember that when `movies` is mapped,
 our `Link`s are each getting a unique path in the `to={...}` attribute, since
@@ -339,10 +339,12 @@ function MovieShow({ movies }) {
 export default MovieShow;
 ```
 
-Here, we've got our `movies` as an object in props. We've also got our `params`
+Here, we've got our `movies` as an object in props. We also have our `params`
 object which was returned from `useParams` based on the current URL. In this
 case, we only have the one parameter, `movieId`, which we defined in the
-`<Route>` in `MoviesPage`. We retrieve the `movieId` for the desired movie from the `params` object, then use that to access the movie from the `movies` object resulting in the correct movie title being displayed!
+`<Route>` in `MoviesPage`. We retrieve the `movieId` for the desired movie from
+the `params` object, then use that to access the movie from the `movies` object
+resulting in the correct movie title being displayed!
 
 We've succeeded in creating a master/detail interface — the list of
 movies is always present when viewing a particular movie's details. Clicking
@@ -396,12 +398,19 @@ these `Route`s will only render inside the `/movies` `Route`.
 
 ## Conclusion
 
-We are able to nest `<Route>` components within each other. Using the
-`useRouteMatch` hook, we can nest a second `Route` that extends the URL path of
-the first. We can actually nest `Route`s as many times as we would like, so if
-we wanted, we could go fully RESTful and create nested `Route`s inside
-`MovieShow` as well, allowing us to write URL paths that would look something
-like this:
+As we have learned in this section, React Router enables us to set up routes
+that allow our users to navigate to different "pages" in our applications. The
+routes we define can be static (e.g., `/movies`) or we can include a _parameter_
+(e.g., `/movies/:movie_id`) to make it dynamic. React Router will also update
+the URL in the browser to reflect whichever page the user has navigated to.
+
+We are also able to nest `<Route>` components within each other, which allows us
+to build single-page applications in React that _behave_ like they have many
+pages. Using the `useRouteMatch` hook, we can nest a second `Route` that extends
+the URL path of the first. We can actually nest `Route`s as many times as we
+would like, so if we wanted, we could go fully RESTful and create nested
+`Route`s inside `MovieShow` as well, allowing us to write URL paths that would
+look something like this:
 
 ```txt
 http://localhost:3000/movies
@@ -410,19 +419,29 @@ http://localhost:3000/movies/:movieId
 http://localhost:3000/movies/:movieId/edit
 ```
 
-To get nested `<Route>` components to work, we need to access both the current
-route and the parameter from the URL. We access the current route using the
-`useRouteMatch` hook. To access the parameter, we first define it in a `Route`'s
-path by prepending a colon (`:`) to the front of the name. This name will then
-show up as a key in the object returned by `useParams`.
+In this lesson, we learned how to set up nested routes to create a
+**master/detail** interface. Specifically, we learned how we can display a list
+of items along with details about an individual item on the same page. To get
+this to work, we needed to complete the following steps:
 
-We can use parameters to look up specific data. In this case, matching the key
-of a `movies` object with the URL parameter, `:movieId`, allowed us to display a
-particular movie's title.
+- In the top-level component (`App.js` in this case), create our "parent" routes
+  and render `<MoviesPage>`
+- In `MoviesPage.js`, render `<MoviesList>`
+- In `MoviesList.js`, iterate through the `movies` object and create a dynamic
+  `Link` for each movie using its id
+- Back in `MoviesPage.js`, import `useRouteMatch` and create the child route by
+  combining the current url with the `:movie_id` parameter; inside the child
+  route, render `<MovieShow>`, passing the `movies` object as props
+- In `MovieShow.js`, import `useParams`; use the `:movie_id` from the params
+  object to access the correct movie from the `movies` object and display it on
+  the page
 
-Nesting routes enables us to build single-page applications in React that
-_behave_ like they have many pages. We can also load up and display specific
-data dynamically.
+In setting up our nested routes, we made use of two hooks provided by React
+Router: `useRouteMatch` and `useParams`. The first is used to retrieve the URL
+of the current page, and the second allows us to access the value of any
+parameters we're using in our routes. The two together, along with the `movies`
+object, gave us all the tools we needed to create dynamic routes for individual
+movies and to display a movie's information when its link is clicked.
 
 In the early days of the internet, we would have had to create separate HTML
 pages **for each movie in this application**. Now, with React, we can write
