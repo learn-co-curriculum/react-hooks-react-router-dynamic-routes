@@ -10,13 +10,13 @@
 ## Introduction
 
 Have you ever used Apple's Messages app for your Mac? What about YouTube? These
-apps use a specific type of interface which consists of a list of all instances
-of a resource (messages, videos, emails, etc.) from which we can select specific
-items. Clicking on one will trigger a more detailed display of that specific
-item on **another portion of the screen** instead of displaying an entirely new
-page. (You may see this pattern referred to as the master/detail pattern.) With
-this design, a user can navigate through many items in a list, looking at item
-details without ever leaving the page they are on.
+apps use a type of **list/detail** interface which consists of a list of all
+instances of a resource (messages, videos, emails, etc.) from which we can
+select specific items. Clicking on one will trigger a more detailed display of
+that specific item on **another portion of the screen** instead of displaying an
+entirely new page. (You may see this pattern referred to as the master/detail
+pattern.) With this design, a user can navigate through many items in a list,
+looking at item details without ever leaving the page they are on.
 
 Consider how we might create this sort of design in regular React, without using
 `Route`s: we could create two sibling components, one for the list, and the
@@ -36,7 +36,7 @@ assigns unique values to each video (something like
 video, the value is listed as part of the URL. This value is a URL parameter and
 allows for convenient sharing and bookmarking.
 
-In this lesson, we will learn how to use React Router to set up this list/item
+In this lesson, we will learn how to use React Router to set up the list/detail
 pattern. Specifically, we will learn how to:
 
 - set up nested `Route`s for list and item components such that clicking on an
@@ -65,8 +65,9 @@ So far, we've only seen `Route`s side by side, but that won't really work in
 this example. When a list item is clicked, we want to see the details of that
 item, but **we still want the list to display**.
 
-Instead of listing two `Route`s side by side, we can use React Router to make
-our `Item` component the _child_ of the `List` component.
+Instead of listing two `Route`s side by side, we can set up the list/detail
+pattern by using React Router to make our `Item` component the _child_ of the
+`List` component.
 
 Think of YouTube again for a moment. Let's pretend that visiting `/videos`
 displays a `List` of videos. Clicking on any video should keep our list of
@@ -345,9 +346,9 @@ case, we only have the one parameter, `movieId`, which we defined in the
 the `params` object, then use that to access the movie from the `movies` object
 resulting in the correct movie title being displayed!
 
-We've succeeded in creating a list/item interface in which the list of movies is
-always present when viewing a particular movie's details. Clicking through the
-links changes the URL. With this setup, users of this site could bookmark or
+We've succeeded in creating a list/detail interface in which the list of movies
+is always present when viewing a particular movie's details. Clicking through
+the links changes the URL. With this setup, users of this site could bookmark or
 share the URL for a specific movie!
 
 ### Handling What Happens If We Only Visit the First Route
@@ -418,7 +419,8 @@ http://localhost:3000/movies/:movieId
 http://localhost:3000/movies/:movieId/edit
 ```
 
-In this lesson, we learned how to set up nested routes to display a list of
+In this lesson, we learned how to set up nested routes to create a
+**list/detail** interface. Specifically, we learned how we can display a list of
 items along with details about an individual item on the same page. To get this
 to work, we needed to complete the following steps:
 
