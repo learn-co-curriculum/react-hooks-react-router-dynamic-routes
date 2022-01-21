@@ -14,9 +14,9 @@ apps use a type of **list/detail** interface which consists of a list of all
 instances of a resource (messages, videos, emails, etc.) from which we can
 select specific items. Clicking on one will trigger a more detailed display of
 that specific item on **another portion of the screen** instead of displaying an
-entirely new page. (You may see this pattern referred to as the master/detail
-pattern.) With this design, a user can navigate through many items in a list,
-looking at item details without ever leaving the page they are on.
+entirely new page. (You may also see this pattern referred to as the
+master/detail pattern.) With this design, a user can navigate through many items
+in a list, looking at item details without ever leaving the page they are on.
 
 Consider how we might create this sort of design in regular React, without using
 `Route`s: we could create two sibling components, one for the list, and the
@@ -31,18 +31,25 @@ link directly to one particular item from our list of resources.
 
 Apps like YouTube display a list of videos, and clicking on any one video will
 load it, but every time you open a particular video, _the URL changes_. YouTube
-assigns unique values to each video (something like
-[`dQw4w9WgXcQ`](https://www.youtube.com/watch?v=dQw4w9WgXcQ)). When viewing that
-video, the value is listed as part of the URL. This value is a URL parameter and
-allows for convenient sharing and bookmarking.
+assigns unique values to each video (something like `dQw4w9WgXcQ`). When viewing
+that video, the value is listed as part of the URL. This value is a URL
+parameter and allows for convenient sharing and bookmarking.
+
+```txt
+https://www.youtube.com/watch?v=dQw4w9WgXcQ
+
+https    :// www.youtube.com / watch ? v             = dQw4w9WgXcQ
+
+protocol :// domain          / path  ? parameter_key = parameter_value
+```
 
 In this lesson, we will learn how to use React Router to set up the list/detail
 pattern. Specifically, we will learn how to:
 
 - set up nested `Route`s for list and item components such that clicking on an
   item will display its details _along with_ the list
-- set up our `Route`s to produce shareable URLs, i.e., URLs that contain
-  a parameter corresponding to the specific resource we want to display
+- set up our `Route`s to produce shareable URLs, i.e., URLs that contain a
+  parameter corresponding to the specific resource we want to display
 
 Our final component hierarchy will look like this:
 
@@ -113,9 +120,8 @@ child components. In our case, that is _all_ of our components.
 </Switch>
 ```
 
-Looking at the `MoviesPage` component, this component is responsible for
-loading our `MoviesList` component and passing in the movies we received from
-`App`.
+Looking at the `MoviesPage` component, this component is responsible for loading
+our `MoviesList` component and passing in the movies we received from `App`.
 
 ```jsx
 // ./src/components/MoviesPage.js
@@ -275,8 +281,9 @@ We have now set up the receiving end of the movie links so React knows what
 component to render when an individual movie's link is clicked.
 
 Refresh the page at `/movies`. Now, clicking a link changes the route, but we're
-not actually seeing any content about that movie on our MovieShow page. You should
-only see the text `Movies Show Component!` under the navigation and movie links.
+not actually seeing any content about that movie on our MovieShow page. You
+should only see the text `Movies Show Component!` under the navigation and movie
+links.
 
 Just as we saw with `App`, the data we want to display on a particular
 `MovieShow` page is available in its parent, `MoviesPage`, as props. For
@@ -307,11 +314,11 @@ function MoviesPage({ movies }) {
 export default MoviesPage;
 ```
 
-This isn't enough though — `MovieShow` now has all the movies, but it
-doesn't know _which_ movie it should display. This information is _only
-available from the URL_. Remember — when we click a `Link` to a movie, it
-adds that movie's `id` to the URL as a **parameter**. We need to get that
-parameter out of the URL and into `MovieShow`.
+This isn't enough though — `MovieShow` now has all the movies, but it doesn't
+know _which_ movie it should display. This information is _only available from
+the URL_. Remember — when we click a `Link` to a movie, it adds that movie's
+`id` to the URL as a **parameter**. We need to get that parameter out of the URL
+and into `MovieShow`.
 
 Just like we can use the `useRouteMatch` hook to get information about the URL
 for the current route, we can also use another hook to get the dynamic `params`
@@ -452,6 +459,7 @@ abstract components that fill in the data for each 'page' on demand. Very cool!
 - [useRouteMatch][use-route-match]
 - [useParams][use-params]
 
-[object destructuring]: https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Operators/Destructuring_assignment
+[object destructuring]:
+  https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Operators/Destructuring_assignment
 [use-route-match]: https://v5.reactrouter.com/web/api/Hooks/useroutematch
 [use-params]: https://v5.reactrouter.com/web/api/Hooks/useparams
