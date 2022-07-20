@@ -14,12 +14,8 @@ function App() {
     <div>
       <NavBar />
       <Switch>
-        <Route path="/movies">
-          <MoviesPage movies={movies} />
-        </Route>
-        <Route exact path="/">
-          <div>Home</div>
-        </Route>
+        <Route path="/movies"> <MoviesPage movies={movies} /></Route>
+        <Route exact path="/"> <div>Home</div></Route>
       </Switch>
     </div>
   );
