@@ -168,9 +168,10 @@ export default MoviesList;
 The `movies` prop has been passed from `App` to `MoviesPage`, then again to
 `MoviesList`.
 
-The `movies` prop is an array containing each movie object. We're mapping
-over this array to create an `li` element and a `Link` for each movie. We are using
-the `id` of each move as the `key` attribute and in the relative `href` for our `Link`s, and are using the `title` of each movie as the text for our `Link`s.
+The `movies` prop is an array containing each movie object. We're mapping over
+this array to create an `li` element and a `Link` for each movie. We are using
+the `id` of each move as the `key` attribute and in the relative `href` for our
+`Link`s, and are using the `title` of each movie as the text for our `Link`s.
 
 In the `Link`, we've used interpolation to insert `movieID` into our path to
 make it dynamic:
@@ -331,7 +332,7 @@ function MovieShow({ movies }) {
   const params = useParams();
   console.log(params);
 
-  const movie = movies.find(movie => movie.id === params.movieId)
+  const movie = movies.find(movie => movie.id === parseInt(params.movieId))
 
   return (
     <div>
@@ -351,6 +352,10 @@ case, we only have the one parameter, `movieId`, which we defined in the
 `<Route>` in `MoviesPage`. We retrieve the `movieId` for the desired movie from
 the `params` object, then use that to find the movie from the `movies` array
 resulting in the correct movie title being displayed!
+
+Note that the datatype in our params object is a `string`, while the datatype of
+our movie.id is a `integer`. We can use JavaScript's built in `parseInt`
+function to handle the type conversion!
 
 We've succeeded in creating a list/detail interface in which the list of movies
 is always present when viewing a particular movie's details. Clicking through
@@ -439,8 +444,8 @@ to work, we needed to complete the following steps:
   combining the current url with the `:movie_id` parameter; inside the child
   route, render `<MovieShow>`, passing the `movies` array as props
 - In `MovieShow.js`, import `useParams`; use the `:movieId` from the params
-  object to find the correct movie from the `movies` array and display it on
-  the page
+  object to find the correct movie from the `movies` array and display it on the
+  page
 
 In setting up our nested routes, we made use of two hooks provided by React
 Router: `useRouteMatch` and `useParams`. The first is used to retrieve the URL
