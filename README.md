@@ -173,7 +173,7 @@ this array to create an `li` element and a `Link` for each movie. We are using
 the `id` of each move as the `key` attribute and in the relative `href` for our
 `Link`s, and are using the `title` of each movie as the text for our `Link`s.
 
-In the `Link`, we've used interpolation to insert `movieID` into our path to
+In the `Link`, we've used interpolation to insert `movie.id` into our path to
 make it dynamic:
 
 ```jsx
@@ -255,7 +255,7 @@ of `movieId` will be `"1"`.
 
 Going back to our `MoviesList` component, remember that when `movies` is mapped,
 our `Link`s are each getting a unique path in the `to={...}` attribute, since
-each `movieID` is different.
+each `movieId` is different.
 
 ```jsx
 // ./src/components/MoviesList.js
@@ -412,8 +412,8 @@ these `Route`s will only render inside the `/movies` `Route`.
 As we have learned in this section, React Router enables us to set up routes
 that allow our users to navigate to different "pages" in our applications. The
 routes we define can be static (e.g., `/movies`) or we can include a _parameter_
-(e.g., `/movies/:movieId`) to make it dynamic. React Router will also update
-the URL in the browser to reflect whichever page the user has navigated to.
+(e.g., `/movies/:movieId`) to make it dynamic. React Router will also update the
+URL in the browser to reflect whichever page the user has navigated to.
 
 We are also able to nest `<Route>` components within each other, which allows us
 to build single-page applications in React that _behave_ like they have many
