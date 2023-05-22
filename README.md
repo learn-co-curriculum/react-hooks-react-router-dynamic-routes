@@ -173,7 +173,7 @@ this array to create an `li` element and a `Link` for each movie. We are using
 the `id` of each move as the `key` attribute and in the relative `href` for our
 `Link`s, and are using the `title` of each movie as the text for our `Link`s.
 
-In the `Link`, we've used interpolation to insert `movieID` into our path to
+In the `Link`, we've used interpolation to insert `movie.id` into our path to
 make it dynamic:
 
 ```jsx
