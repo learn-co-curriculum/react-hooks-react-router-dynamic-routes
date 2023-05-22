@@ -346,7 +346,7 @@ function MovieShow({ movies }) {
 export default MovieShow;
 ```
 
-Here, we've got our `movies` as an object in props. We also have our `params`
+Here, we've got our `movies` as an array in props. We also have our `params`
 object which was returned from `useParams` based on the current URL. In this
 case, we only have the one parameter, `movieId`, which we defined in the
 `<Route>` in `MoviesPage`. We retrieve the `movieId` for the desired movie from
@@ -412,7 +412,7 @@ these `Route`s will only render inside the `/movies` `Route`.
 As we have learned in this section, React Router enables us to set up routes
 that allow our users to navigate to different "pages" in our applications. The
 routes we define can be static (e.g., `/movies`) or we can include a _parameter_
-(e.g., `/movies/:movie_id`) to make it dynamic. React Router will also update
+(e.g., `/movies/:movieId`) to make it dynamic. React Router will also update
 the URL in the browser to reflect whichever page the user has navigated to.
 
 We are also able to nest `<Route>` components within each other, which allows us
@@ -441,7 +441,7 @@ to work, we needed to complete the following steps:
 - In `MoviesList.js`, iterate through the `movies` array and create a dynamic
   `Link` for each movie using its id
 - Back in `MoviesPage.js`, import `useRouteMatch` and create the child route by
-  combining the current url with the `:movie_id` parameter; inside the child
+  combining the current url with the `:movieId` parameter; inside the child
   route, render `<MovieShow>`, passing the `movies` array as props
 - In `MovieShow.js`, import `useParams`; use the `:movieId` from the params
   object to find the correct movie from the `movies` array and display it on the
