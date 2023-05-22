@@ -96,11 +96,11 @@ component. `App` has some dummy movie data provided in state for us (normally,
 we would likely be fetching this info).
 
 ```jsx
-const [movies, setMovies] = useState({
-  1: { id: 1, title: "A River Runs Through It" },
-  2: { id: 2, title: "Se7en" },
-  3: { id: 3, title: "Inception" },
-});
+const [movies, setMovies] = useState([
+  { id: 1, title: "A River Runs Through It" },
+  { id: 2, title: "Se7en" },
+  { id: 3, title: "Inception" }
+]);
 ```
 
 Looking at the `index.js` file, we see that we have `Router` wrapping our `App`.
@@ -153,9 +153,9 @@ import React from "react";
 import { Link } from "react-router-dom";
 
 function MoviesList({ movies }) {
-  const renderMovies = Object.keys(movies).map((movieID) => (
-    <li key={movieID}>
-      <Link to={`/movies/${movieID}`}>{movies[movieID].title}</Link>
+  const renderMovies = movies.map((movie) => (
+    <li key={movie.id}>
+      <Link to={`/movies/${movie.id}`}>{movie.title}</Link>
     </li>
   ));
 
@@ -168,18 +168,16 @@ export default MoviesList;
 The `movies` prop has been passed from `App` to `MoviesPage`, then again to
 `MoviesList`.
 
-The `movies` prop is an object containing each movie. To iterate over this
-object, we are using `Object.keys(movies)` to get an array of keys, then mapping
-over this array. Since the keys in the object _are also the id values for each
-movie_, the elements in `.map()` are referred to as `movieID`. We are using
-`movieID` directly in the `key` attribute, and also using it to get information
-from the `movies` object, as we see with `movies[movieID].title`.
+The `movies` prop is an array containing each movie object. We're mapping over
+this array to create an `li` element and a `Link` for each movie. We are using
+the `id` of each movie as the `key` attribute and in the relative `href` for our
+`Link`s, and are using the `title` of each movie as the text for our `Link`s.
 
-In the `Link`, we've used interpolation to insert `movieID` into our path to
+In the `Link`, we've used interpolation to insert `movie.id` into our path to
 make it dynamic:
 
 ```jsx
-to={`/movies/${movieID}`}
+to={`/movies/${movie.id}`}
 ```
 
 Now, if we start up the app, we'll see that if a user goes to the `/movies`
@@ -257,7 +255,7 @@ of `movieId` will be `"1"`.
 
 Going back to our `MoviesList` component, remember that when `movies` is mapped,
 our `Link`s are each getting a unique path in the `to={...}` attribute, since
-each `movieID` is different.
+each `movieId` is different.
 
 ```jsx
 // ./src/components/MoviesList.js
@@ -265,9 +263,9 @@ import React from "react";
 import { Link } from "react-router-dom";
 
 function MoviesList({ movies }) {
-  const renderMovies = Object.keys(movies).map((movieID) => (
-    <li key={movieID}>
-      <Link to={`/movies/${movieID}`}>{movies[movieID].title}</Link>
+  const renderMovies = movies.map((movie) => (
+    <li key={movie.id}>
+      <Link to={`/movies/${movie.id}`}>{movie.title}</Link>
     </li>
   ));
 
@@ -334,11 +332,13 @@ function MovieShow({ movies }) {
   const params = useParams();
   console.log(params);
 
+  const movie = movies.find(movie => movie.id === parseInt(params.movieId))
+
   return (
     <div>
       {/* And here we access the `movieId` stored in `params` to render 
         information about the selected movie */}
-      <h3>{movies[params.movieId].title}</h3>
+      <h3>{movie.title}</h3>
     </div>
   );
 }
@@ -346,12 +346,16 @@ function MovieShow({ movies }) {
 export default MovieShow;
 ```
 
-Here, we've got our `movies` as an object in props. We also have our `params`
+Here, we've got our `movies` as an array in props. We also have our `params`
 object which was returned from `useParams` based on the current URL. In this
 case, we only have the one parameter, `movieId`, which we defined in the
 `<Route>` in `MoviesPage`. We retrieve the `movieId` for the desired movie from
-the `params` object, then use that to access the movie from the `movies` object
+the `params` object, then use that to find the movie from the `movies` array
 resulting in the correct movie title being displayed!
+
+Note that the datatype in our params object is a `string`, while the datatype of
+our movie.id is a `integer`. We can use JavaScript's built in `parseInt`
+function to handle the type conversion!
 
 We've succeeded in creating a list/detail interface in which the list of movies
 is always present when viewing a particular movie's details. Clicking through
@@ -408,8 +412,8 @@ these `Route`s will only render inside the `/movies` `Route`.
 As we have learned in this section, React Router enables us to set up routes
 that allow our users to navigate to different "pages" in our applications. The
 routes we define can be static (e.g., `/movies`) or we can include a _parameter_
-(e.g., `/movies/:movie_id`) to make it dynamic. React Router will also update
-the URL in the browser to reflect whichever page the user has navigated to.
+(e.g., `/movies/:movieId`) to make it dynamic. React Router will also update the
+URL in the browser to reflect whichever page the user has navigated to.
 
 We are also able to nest `<Route>` components within each other, which allows us
 to build single-page applications in React that _behave_ like they have many
@@ -434,14 +438,14 @@ to work, we needed to complete the following steps:
 - In the top-level component (`App.js` in this case), create our "parent" routes
   and render `<MoviesPage>`
 - In `MoviesPage.js`, render `<MoviesList>`
-- In `MoviesList.js`, iterate through the `movies` object and create a dynamic
+- In `MoviesList.js`, iterate through the `movies` array and create a dynamic
   `Link` for each movie using its id
 - Back in `MoviesPage.js`, import `useRouteMatch` and create the child route by
-  combining the current url with the `:movie_id` parameter; inside the child
-  route, render `<MovieShow>`, passing the `movies` object as props
-- In `MovieShow.js`, import `useParams`; use the `:movie_id` from the params
-  object to access the correct movie from the `movies` object and display it on
-  the page
+  combining the current url with the `:movieId` parameter; inside the child
+  route, render `<MovieShow>`, passing the `movies` array as props
+- In `MovieShow.js`, import `useParams`; use the `:movieId` from the params
+  object to find the correct movie from the `movies` array and display it on the
+  page
 
 In setting up our nested routes, we made use of two hooks provided by React
 Router: `useRouteMatch` and `useParams`. The first is used to retrieve the URL
